@@ -1,0 +1,17 @@
+# requirements.txt
+cassandra-driver
+pandas
+numpy
+scikit-learn
+xgboost
+flask
+fastapi
+uvicorn
+streamlit
+mlflow
+dvc
+pytest
+memory_profiler
+matplotlib
+seaborn
+-e .
