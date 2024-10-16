@@ -47,7 +47,7 @@ if __name__ == "__main__":
     
     # Ensure that the 'processed' folder exists
     processed_dir = 'C:/Users/pc/OneDrive/Documents/Main_Projects/Sales_Store_Predictions/data/processed'
-    os.makedirs(processed_dir, exist_ok=True)
+
     
-    train_df.to_csv(f'{processed_dir}/train_processed')
-    test_df.to_csv(f'{processed_dir}/test_processed')
+    train_df.to_csv(processed_dir,'/train_processed.csv',index=False)
+    test_df.to_csv(processed_dir,'/test_processed.csv',index=False)
