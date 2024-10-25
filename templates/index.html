@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Store Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Sales Store Prediction</h1>
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="Item_Identifier">Item Identifier:</label>
+                <select name="Item_Identifier" id="Item_Identifier" class="form-control" required>
+                    {% for value in unique_values['Item_Identifier'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Item_Weight">Item Weight:</label>
+                <input type="number" name="Item_Weight" id="Item_Weight" class="form-control" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Item_Fat_Content">Item Fat Content:</label>
+                <select name="Item_Fat_Content" id="Item_Fat_Content" class="form-control" required>
+                    {% for value in unique_values['Item_Fat_Content'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Item_Visibility">Item Visibility:</label>
+                <input type="number" name="Item_Visibility" id="Item_Visibility" class="form-control" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Item_MRP">Item MRP:</label>
+                <input type="number" name="Item_MRP" id="Item_MRP" class="form-control" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Item_Type">Item Type:</label>
+                <select name="Item_Type" id="Item_Type" class="form-control" required>
+                    {% for value in unique_values['Item_Type'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Outlet_Size">Outlet Size:</label>
+                <select name="Outlet_Size" id="Outlet_Size" class="form-control" required>
+                    {% for value in unique_values['Outlet_Size'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Outlet_Location_Type">Outlet Location Type:</label>
+                <select name="Outlet_Location_Type" id="Outlet_Location_Type" class="form-control" required>
+                    {% for value in unique_values['Outlet_Location_Type'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Outlet_Type">Outlet Type:</label>
+                <select name="Outlet_Type" id="Outlet_Type" class="form-control" required>
+                    {% for value in unique_values['Outlet_Type'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Outlet_Identifier">Outlet Identifier:</label>
+                <select name="Outlet_Identifier" id="Outlet_Identifier" class="form-control" required>
+                    {% for value in unique_values['Outlet_Identifier'] %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Outlet_Establishment_Year">Outlet Establishment Year:</label>
+                <input type="number" name="Outlet_Establishment_Year" id="Outlet_Establishment_Year" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+            <h3>Prediction Result:</h3>
+            <p>The predicted sales amount is: <strong>{{ prediction }}</strong></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
