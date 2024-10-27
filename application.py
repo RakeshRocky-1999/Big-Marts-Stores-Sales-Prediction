@@ -4,7 +4,9 @@ import pickle
 from src.logger import logging
 from src.data_files.preprocess_engeneering import FeatureEngineering
 
-app = Flask(__name__)
+application = Flask(__name__)
+
+app=application
 
 
 # Load preprocessor and model
@@ -88,5 +90,6 @@ def index():
     return render_template('index.html', unique_values=unique_values) 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=7777)
+    app.run(port=7777)
+    
 
