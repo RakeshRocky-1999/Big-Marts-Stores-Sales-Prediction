@@ -6,7 +6,6 @@ from src.data_files.preprocess_engeneering import FeatureEngineering
 
 application = Flask(__name__)
 
-app=application
 
 
 # Load preprocessor and model
@@ -31,7 +30,7 @@ def load_unique_values(train_data_path):
     logging.info("Unique values loaded for categorical columns.")
     return unique_values
 
-@app.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
 def index():
     logging.info("Reached index route.")
     
@@ -90,6 +89,6 @@ def index():
     return render_template('index.html', unique_values=unique_values) 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
     
 
