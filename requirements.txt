@@ -14,5 +14,4 @@ pytest
 memory_profiler
 matplotlib
 seaborn
-dill
 -e .
