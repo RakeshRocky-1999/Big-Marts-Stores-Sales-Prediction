@@ -1,11 +1,16 @@
 from flask import Flask, render_template, request  # type: ignore
 import pandas as pd
 import pickle
+import os
+import logging
+
 from src.logger import logging
 from src.data_files.preprocess_engeneering import FeatureEngineering
-import os
 
 application = Flask(__name__)
+
+# Logging setup
+logging.basicConfig(level=logging.INFO)
 
 # Get the base directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -13,10 +18,14 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Load preprocessor and model
 def load_preprocessor_and_model(preprocessor_path, model_path):
     logging.info("Loading preprocessor and model from disk.")
-    with open(preprocessor_path, 'rb') as f:
-        preprocessor = pickle.load(f)
-    with open(model_path, 'rb') as f:
-        model = pickle.load(f)
+    try:
+        with open(preprocessor_path, 'rb') as f:
+            preprocessor = pickle.load(f)
+        with open(model_path, 'rb') as f:
+            model = pickle.load(f)
+    except Exception as e:
+        logging.error(f"Error loading preprocessor/model: {str(e)}")
+        raise
     logging.info("Preprocessor and model loaded successfully.")
     return preprocessor, model
 
@@ -42,14 +51,13 @@ def index():
     model_path = os.path.join(BASE_DIR, 'data', 'processed', 'best_model.pkl')
     
     logging.info("Loading unique values...")
-    # Load categorical options from the training data
     unique_values = load_unique_values(train_data_path)
     logging.info(f"Loaded unique values: {unique_values}")
     
     if request.method == 'POST':
         logging.info("POST method triggered.")
         
-        # Get form data including 'Outlet_Establishment_Year' and 'Item_Identifier'
+        # Get form data
         form_data = {
             'Item_Identifier': request.form['Item_Identifier'],
             'Item_Weight': request.form['Item_Weight'],
@@ -70,26 +78,42 @@ def index():
         test_df = pd.DataFrame([form_data])
         
         # Convert numeric values to appropriate types
-        test_df['Item_Weight'] = test_df['Item_Weight'].astype(float)
-        test_df['Item_Visibility'] = test_df['Item_Visibility'].astype(float)
-        test_df['Item_MRP'] = test_df['Item_MRP'].astype(float)
-        test_df['Outlet_Establishment_Year'] = test_df['Outlet_Establishment_Year'].astype(int)  # Integer type
+        try:
+            test_df['Item_Weight'] = test_df['Item_Weight'].astype(float)
+            test_df['Item_Visibility'] = test_df['Item_Visibility'].astype(float)
+            test_df['Item_MRP'] = test_df['Item_MRP'].astype(float)
+            test_df['Outlet_Establishment_Year'] = test_df['Outlet_Establishment_Year'].astype(int)
+        except ValueError as ve:
+            logging.error(f"Error converting data types: {str(ve)}")
+            return render_template('index.html', unique_values=unique_values, error="Invalid data input.")
         
         # Load the preprocessor and model
-        preprocessor, model = load_preprocessor_and_model(preprocessor_path, model_path)
-
+        try:
+            preprocessor, model = load_preprocessor_and_model(preprocessor_path, model_path)
+        except Exception as e:
+            return render_template('index.html', unique_values=unique_values, error="Model or preprocessor could not be loaded.")
+        
         # Preprocess test data
-        test_processed = pd.DataFrame(preprocessor.transform(test_df).toarray())
-        logging.info(f"Processed test data: {test_processed.head()}")
-
+        try:
+            test_processed = pd.DataFrame(preprocessor.transform(test_df).toarray())
+            logging.info(f"Processed test data: {test_processed.head()}")
+        except Exception as e:
+            logging.error(f"Error preprocessing data: {str(e)}")
+            return render_template('index.html', unique_values=unique_values, error="Error preprocessing data.")
+        
         # Make prediction
-        prediction = model.predict(test_processed)[0]
-        logging.info(f"Prediction made: {prediction}")
-
+        try:
+            prediction = model.predict(test_processed)[0]
+            logging.info(f"Prediction made: {prediction}")
+        except Exception as e:
+            logging.error(f"Error making prediction: {str(e)}")
+            return render_template('index.html', unique_values=unique_values, error="Error making prediction.")
+        
         return render_template('index.html', prediction=prediction, unique_values=unique_values) 
     
     return render_template('index.html', unique_values=unique_values) 
 
 if __name__ == '__main__':
-    application.run(debug=True,port=8888)
+    application.run(port=8888)  # Remove debug=True in production
+
 
