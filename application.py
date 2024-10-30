@@ -114,6 +114,6 @@ def index():
     return render_template('index.html', unique_values=unique_values) 
 
 if __name__ == '__main__':
-    application.run(port=8888)  # Remove debug=True in production
+    application.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))  # Remove debug=True in production
 
 
