@@ -1,13 +1,14 @@
-# requirements.txt
 cassandra-driver
 pandas
 numpy
 scikit-learn
 xgboost
 flask
-fastapi
-uvicorn
+flask-cors
+flask-logging
+joblib
+requests
+python-dotenv
 matplotlib
 seaborn
-scikit-learn
 gunicorn
