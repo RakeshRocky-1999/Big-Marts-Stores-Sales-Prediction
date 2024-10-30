@@ -3,10 +3,12 @@ import pandas as pd
 import pickle
 from src.logger import logging
 from src.data_files.preprocess_engeneering import FeatureEngineering
+import os
 
 application = Flask(__name__)
 
-
+# Get the base directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load preprocessor and model
 def load_preprocessor_and_model(preprocessor_path, model_path):
@@ -34,10 +36,10 @@ def load_unique_values(train_data_path):
 def index():
     logging.info("Reached index route.")
     
-    # Path to the training data and model files
-    train_data_path = 'C:/Users/pc/OneDrive/Documents/Main_Projects/Sales_Store_Predictions/data/Train.csv'
-    preprocessor_path = 'C:/Users/pc/OneDrive/Documents/Main_Projects/Sales_Store_Predictions/data/processed/preprocessor.pkl'
-    model_path = 'C:/Users/pc/OneDrive/Documents/Main_Projects/Sales_Store_Predictions/data/processed/best_model.pkl'
+    # Relative paths to the training data and model files
+    train_data_path = os.path.join(BASE_DIR, 'data', 'Train.csv')
+    preprocessor_path = os.path.join(BASE_DIR, 'data', 'processed', 'preprocessor.pkl')
+    model_path = os.path.join(BASE_DIR, 'data', 'processed', 'best_model.pkl')
     
     logging.info("Loading unique values...")
     # Load categorical options from the training data
@@ -77,7 +79,7 @@ def index():
         preprocessor, model = load_preprocessor_and_model(preprocessor_path, model_path)
 
         # Preprocess test data
-        test_processed=pd.DataFrame(preprocessor.transform(test_df).toarray())
+        test_processed = pd.DataFrame(preprocessor.transform(test_df).toarray())
         logging.info(f"Processed test data: {test_processed.head()}")
 
         # Make prediction
@@ -89,6 +91,5 @@ def index():
     return render_template('index.html', unique_values=unique_values) 
 
 if __name__ == '__main__':
-    application.run(debug=True)
-    
+    application.run(debug=True,port=8888)
 
