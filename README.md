@@ -18,6 +18,10 @@
 13. System Architecture
 14. Model Latency & Optimization
 15. Future Improvements
+16. License
+17. Contact
+18. How to use/usage
+19. Demo
 
 ## Project Overview
 
@@ -220,4 +224,4 @@ Use the web form to input values for the features, and the app will return predi
 
 Insert gif or link to demo
 
-C:/Users/pc/Downloads/SalesStorePrediction-GoogleChrome2024-11-0114-54-51-ezgif.com-effects.gif
+![SalesStorePrediction-GoogleChrome2024-11-0114-54-51-ezgif com-effects](https://github.com/user-attachments/assets/71542512-6c53-4c44-9406-21d38e464a4c)
