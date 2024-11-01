@@ -7,7 +7,7 @@ import logging
 from src.logger import logging
 from src.data_files.preprocess_engeneering import FeatureEngineering
 
-application = Flask(__name__)
+app = Flask(__name__)
 
 # Logging setup
 logging.basicConfig(level=logging.INFO)
@@ -41,7 +41,7 @@ def load_unique_values(train_data_path):
     logging.info("Unique values loaded for categorical columns.")
     return unique_values
 
-@application.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     logging.info("Reached index route.")
     
@@ -114,6 +114,7 @@ def index():
     return render_template('index.html', unique_values=unique_values) 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))  # Remove debug=True in production
+     app.run(host='0.0.0.0', port=8000)  # Listen on all interfaces
+  
 
 
