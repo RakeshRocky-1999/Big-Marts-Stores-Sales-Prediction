@@ -127,8 +127,6 @@ Sales_Store_Prediction/
 │
 ├── templates/                 # HTML templates
 │   └── index.html
-├── .ebextension/              # AWS Elastic Beanstalk config
-│   └── python.config
 ├── .gitignore                 # Files to be ignored by Git
 ├── requirements.txt           # Required libraries
 ├── application.py             # Main Flask application
