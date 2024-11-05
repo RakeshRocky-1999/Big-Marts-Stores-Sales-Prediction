@@ -115,7 +115,5 @@ def index():
 
 if __name__ == '__main__':
      app.run(host='0.0.0.0', port=8000)  # Listen on all interfaces
-  
-
-
+     # local Deployment link is ' http://127.0.0.1:8000/ '
 
