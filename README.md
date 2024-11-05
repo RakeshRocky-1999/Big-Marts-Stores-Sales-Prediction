@@ -220,6 +220,6 @@ http://127.0.0.1:8000/
 Use the web form to input values for the features, and the app will return predicted sales based on the trained model.
 
 ## Demo
-
+Demo `Gif` of the project how it works and predicts sales
 
 ![SalesStorePrediction-GoogleChrome2024-11-0114-54-51-ezgif com-effects](https://github.com/user-attachments/assets/71542512-6c53-4c44-9406-21d38e464a4c)
