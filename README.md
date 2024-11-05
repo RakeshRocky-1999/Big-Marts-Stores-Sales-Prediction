@@ -154,6 +154,7 @@ Different machine learning models were trained, including:
 - Random Forest regressor
 - AdaBoost regressor
 - KNeighborsRegressor
+
 The model with the best performance (RandomForest) is saved as `best_model.pkl`.
 ## Prediction
 
