@@ -1,5 +1,6 @@
 
 # Stores Sales Prediction
+![SalesStorePrediction-GoogleChrome2024-11-0114-54-51-ezgif com-effects](https://github.com/user-attachments/assets/71542512-6c53-4c44-9406-21d38e464a4c)
 
 # Table of Contents
 
