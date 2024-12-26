@@ -1,6 +1,5 @@
 
 # Stores Sales Prediction
-![SalesStorePrediction-GoogleChrome2024-11-0114-54-51-ezgif com-effects](https://github.com/user-attachments/assets/71542512-6c53-4c44-9406-21d38e464a4c)
 
 ![NewTab-GoogleChrome2024-11-0510-45-56-ezgif com-crop](https://github.com/user-attachments/assets/1e821464-df3e-4985-af0e-7dd2ac5c58f9)
 
