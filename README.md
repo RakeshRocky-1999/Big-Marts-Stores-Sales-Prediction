@@ -1,7 +1,8 @@
 
 # Stores Sales Prediction
 
-![NewTab-GoogleChrome2024-11-0510-45-56-ezgif com-crop](https://github.com/user-attachments/assets/1e821464-df3e-4985-af0e-7dd2ac5c58f9)
+![Uploading NewTab-GoogleChrome2024-11-0510-45-56-ezgif.com-crop.gif…]()
+
 
 # Table of Contents
 
